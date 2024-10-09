@@ -119,5 +119,33 @@ To use this function within an Express server:
 
 ## Example of How It Works
 
+To illustrate the algorithm, suppose `` x = 2, y = 10,`` and ``z = 4``
 
-  
+### 1. Initial State:
+Both buckets are empty: ``(a = 0, b = 0).``
+
+### 2. Fill Bucket X:
+- Fill Bucket X to its full capacity: ``(a = 2, b = 0).``
+- Action: "Fill jug A (A: 2, B: 0)".
+
+### 3. Transfer from Bucket X to Bucket Y:
+
+- Pour the 2 liters from Bucket X into Bucket Y: ``(a = 0, b = 2).``
+- Action: "Transfer jug A into B (A: 0, B: 2)".
+
+### 4. Fill Bucket X Again:
+
+- Refill Bucket X to its full capacity: ``(a = 2, b = 2).``
+- Action: "Fill jug A (A: 2, B: 2)".
+
+### 5. Transfer from Bucket X to Bucket Y:
+
+Transfer the 2 liters from Bucket X into Bucket Y, which already contains 2 liters. Now Bucket Y has 4 liters: ``(a = 0, b = 4).``
+Action: "Transfer jug A into B (A: 0, B: 4)".
+
+## Example Solution Steps:
+
+1. Fill jug A (A: 2, B: 0)
+2. Transfer jug A into B (A: 0, B: 2)
+3. Fill jug A (A: 2, B: 2)
+4. Transfer jug A into B (A: 0, B: 4)
