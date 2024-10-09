@@ -77,7 +77,47 @@ To use this function within an Express server:
 
 ``app.post('/api/v1/waterjug/solve', solve);``
 
+## Code Structure
+
+### 1. Input Validation:
+
+- The algorithm begins by checking that the jug capacities (x and y) and the desired amount (z) are valid.
+- It verifies that x and y are greater than zero, and that z is greater than or equal to zero and does not exceed the capacity of the largest jug (Math.max(x, y)).
+- It confirms that x, y, and z are integers. If any of these parameters are invalid, it returns a 400 error with a message of "Invalid parameters."
+
+### 2.Search Algorithm (BFS):
+
+- The ``solveWaterJug`` function is defined to carry out the search and find the necessary steps.
+
+### Initialization:
+
+- A set (visited) is created to store already explored states and avoid revisiting the same states.
+- A queue (queue) is initialized with the initial state of the jugs ``(a = 0, b = 0)``, and an empty list of steps.
+
+#### 1. Fill a jug: A can be filled completely (a = x) or B can be filled completely (b = y).
+#### 2. Empty a jug: A can be emptied (a = 0) or B can be emptied (b = 0).
+#### 3. Transfer between jugs:
+
+   - Transfer from A to B: Pour the maximum amount from A to B until B is full or A is empty.
+   - Transfer from B to A: Pour the maximum amount from B to A until A is full or B is empty.
+
+- Each action generates a new state and describes the action taken.
+
+### Success Check:
+
+- After each action, the algorithm checks if the desired amount ``(z)`` has been reached in either jug ``(a or b)``.
+- If ``z`` is found in one of the jugs, it returns the sequence of steps that led to this state.
+
+### Avoid Repeated States:
+
+- To avoid cycles and revisiting already explored states, the code stores visited states in ``visited``. If a new state has not been visited before, it is added to the queue for further exploration.
+
+### Algorithm Result:
+
+- If the steps are found, the sequence is returned as a JSON object.
+- If no solution is found after exploring all possible states, the algorithm responds with a 400 error and a message of "No solution."
+
+## Example of How It Works
 
 
-
-
+  
